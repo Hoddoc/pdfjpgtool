@@ -1,20 +1,20 @@
 const fetch = require('node-fetch');
+const btoa = require('btoa');
 
 exports.handler = async (event, context) => {
   const code = event.queryStringParameters.code;
-  const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+  const clientSecret = process.env.DROPBOX_CLIENT_SECRET;
 
-  const response = await fetch("https://oauth2.googleapis.com/token", {
+  const response = await fetch("https://api.dropboxapi.com/oauth2/token", {
     method: "POST",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "Basic " + btoa("ox2nxs1balk4l4i:" + clientSecret),
+      "Content-Type": "application/x-www-form-urlencoded"
     },
     body: new URLSearchParams({
       code,
-      client_id: "330202967434-9u0gnm9ud2f3oasfp0npn6br4h93qs8i.apps.googleusercontent.com",
-      client_secret: clientSecret,
-      redirect_uri: "https://pdfjpgtool.com/auth/google/callback",
-      grant_type: "authorization_code"
+      grant_type: "authorization_code",
+      redirect_uri: "https://pdfjpgtool.com/auth/dropbox/callback"
     })
   });
 
