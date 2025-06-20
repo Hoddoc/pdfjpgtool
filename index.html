@@ -466,10 +466,9 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="upload-card-body">
+<div class="upload-card-body" style="background-color: #f4f6f7; border-radius: 12px; padding: 24px;">
   <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
-    <h2 class="text-dark mb-0">PDF 파일 업로드하기</h2>
+    <h2 class="text-dark mb-0" style="color: #1f2d3d; font-weight: bold;">📂 PDF 파일 업로드하기</h2>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-dark" id="uploadChevron" aria-hidden="true" style="transition: transform 0.3s; transform: rotate(180deg);">
       <polyline points="6 9 12 15 18 9"></polyline>
     </svg>
@@ -500,21 +499,18 @@
         </div>
 
         <p class="upload-text mb-2 mt-3">또는 PDF 파일을 여기로 드래그하세요</p>
-        <small class="text-muted d-block">클라우드 연결 상태: <span id="cloud-status-indicator" style="color: rgb(40, 167, 69);">Dropbox, Drive 연결됨</span></small>
+        <small class="text-muted d-block">클라우드 연결 상태: <span id="cloud-status-indicator" style="color: rgb(255, 0, 0);">연결된 서비스 없음</span></small>
         <small class="text-muted">PDF 파일만 지원 • 최대 50MB • 빠르고 안전한 변환</small>
 
         <div class="cloud-upload-section mt-4 text-center">
           <label for="cloud-provider" class="form-label fw-bold">클라우드 저장 위치 선택:</label>
           <div class="dropdown d-inline-block">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="cloudDropdownBtn" data-bs-toggle="dropdown" aria-expanded="false">
-              <span id="selectedCloudProvider">Google Drive</span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="cloudDropdownBtn">
-              <li><a class="dropdown-item" href="#" onclick="selectCloudProvider('Google Drive', 'google')">Google Drive</a></li>
-              <li><a class="dropdown-item" href="#" onclick="selectCloudProvider('Dropbox', 'dropbox')">Dropbox</a></li>
-            </ul>
+            <select class="form-select w-auto d-inline-block" id="cloud-provider">
+              <option value="google">Google Drive</option>
+              <option value="dropbox">Dropbox</option>
+            </select>
           </div>
-          <input type="hidden" id="cloud-provider" value="google">
+
           <input type="text" id="cloud-token" class="form-control mt-3 mx-auto" placeholder="Access Token 입력" required style="max-width: 400px;">
           <button type="button" class="btn btn-success mt-3" onclick="uploadToCloud()">클라우드에 저장</button>
           <div id="cloud-upload-result" class="mt-2 text-muted small"></div>
@@ -546,11 +542,43 @@
 </div>
 
 <script>
-function selectCloudProvider(name, value) {
-  document.getElementById("selectedCloudProvider").textContent = name;
-  document.getElementById("cloud-provider").value = value;
+function uploadToCloud() {
+  const provider = document.getElementById("cloud-provider").value;
+  const token = document.getElementById("cloud-token").value;
+  const fileInput = document.getElementById("pdfFileInput");
+
+  if (!fileInput.files.length) {
+    alert("PDF 파일을 선택해주세요.");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+
+  reader.onload = async () => {
+    const base64Content = reader.result.split(",")[1];
+    try {
+      const response = await fetch("/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider,
+          access_token: token,
+          filename: file.name,
+          file_content: atob(base64Content)
+        })
+      });
+      const result = await response.text();
+      document.getElementById("cloud-upload-result").innerText = result;
+    } catch (error) {
+      document.getElementById("cloud-upload-result").innerText = "에러 발생: " + error.message;
+    }
+  };
+
+  reader.readAsDataURL(file);
 }
 </script>
+
 
 
                     <!-- Processing Options -->
