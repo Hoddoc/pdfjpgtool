@@ -466,115 +466,105 @@
                         </div>
                     </div>
 
-               <!-- ✅ PDF 업로드 섹션 -->
-<section class="upload-card-body mb-5">
-  <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
-    <h2 class="text-dark mb-0">📁 PDF 파일 업로드하기</h2>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-dark" style="transition: transform 0.3s; transform: rotate(180deg);"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </div>
+              <div class="upload-card-body" style="background-color: #f4f6f7; border-radius: 12px; padding: 32px; margin-bottom: 80px;">
+  <h2 class="text-dark fw-bold mb-4 d-flex align-items-center">
+    📂 <span class="ms-2">PDF 파일 업로드하기</span>
+  </h2>
 
-  <div id="uploadSection">
-    <div class="upload-area-new text-center py-5">
-      <input type="file" id="pdfFileInput" accept=".pdf" class="visually-hidden">
-      <button class="btn btn-outline-primary btn-lg mb-3" onclick="document.getElementById('pdfFileInput').click()">📄 PDF 파일 선택</button>
-      <p class="upload-text">또는 PDF 파일을 여기로 드래그하세요</p>
-      <small class="text-muted">PDF 파일만 지원 • 최대 50MB • 빠르고 안전한 변환</small>
-
-      <div class="mt-4">
-        <label class="form-label fw-bold">📦 저장할 클라우드 선택:</label>
-        <div class="d-flex justify-content-center gap-2">
-          <button id="googleBtn" class="btn btn-outline-secondary" onclick="selectProvider('google')">🧭 Google Drive</button>
-          <button id="dropboxBtn" class="btn btn-outline-secondary" onclick="selectProvider('dropbox')">🗃️ Dropbox</button>
+  <div class="border rounded p-4" style="border-style: dashed;">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-4">
+      <!-- 왼쪽: 업로드 -->
+      <div class="text-start">
+        <div class="d-flex align-items-center mb-2">
+          📄 <span class="ms-2 fw-bold">PDF 파일 선택</span>
         </div>
+        <p class="mb-1 text-muted small">또는 PDF 파일을 여기로 드래그하세요</p>
+        <p class="text-muted small">📌 PDF 파일만 지원 • 최대 50MB • 빠른 방식의 안전한 변환</p>
+        <button type="button" class="btn btn-outline-primary mt-2" onclick="document.getElementById('pdfFileInput').click()">파일 선택</button>
+        <input type="file" id="pdfFileInput" accept=".pdf" style="display: none;" />
+      </div>
 
-        <input type="text" id="cloudToken" class="form-control mt-3" placeholder="Access Token 입력">
-        <button class="btn btn-success mt-3" onclick="uploadToCloud()">클라우드에 저장</button>
-        <div id="uploadResult" class="mt-2 text-muted small"></div>
+      <!-- 오른쪽: 클라우드 -->
+      <div class="text-start">
+        <div class="fw-bold mb-2 d-flex align-items-center">
+          🗂️ <span class="ms-2">저장할 클라우드 선택</span>
+        </div>
+        <div class="d-flex gap-2 mb-2">
+          <button type="button" class="btn btn-outline-secondary btn-developer-style" onclick="setCloudProvider('google')">🧏 Google Drive</button>
+          <button type="button" class="btn btn-outline-secondary btn-developer-style" onclick="setCloudProvider('dropbox')">📦 Dropbox</button>
+        </div>
+        <input type="text" id="cloud-token" class="form-control" placeholder="Access Token 입력" style="max-width: 300px;">
+        <button type="button" class="btn btn-success mt-2" onclick="uploadToCloud()">클라우드에 저장</button>
+        <div id="cloud-upload-result" class="mt-2 text-muted small"></div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- ✅ 변환 옵션 섹션과 간격 확보 -->
 <style>
-  section.upload-card-body {
-    background: #fff;
-    border-radius: 12px;
-    padding: 32px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.05);
-  }
-  .upload-area-new {
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    padding: 30px;
-    background-color: #f9f9f9;
-  }
-  .btn-selected {
-    background-color: #0d6efd;
-    color: white;
-    border-color: #0d6efd;
-  }
+.btn-developer-style {
+  background-color: #f3f4f6;
+  border: 1px solid #ced4da;
+  color: #212529;
+  padding: 6px 16px;
+  font-size: 14px;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+.btn-developer-style:hover {
+  background-color: #e2e6ea;
+}
+.btn-developer-style.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
 </style>
 
 <script>
-  let selectedProvider = null;
+let selectedProvider = "google";
 
-  function selectProvider(provider) {
-    selectedProvider = provider;
-    document.getElementById("googleBtn").classList.remove("btn-selected");
-    document.getElementById("dropboxBtn").classList.remove("btn-selected");
-    document.getElementById(provider + "Btn").classList.add("btn-selected");
+function setCloudProvider(provider) {
+  selectedProvider = provider;
+  document.querySelectorAll(".cloud-upload-section .btn-developer-style").forEach(btn => btn.classList.remove("btn-primary"));
+  event.target.classList.add("btn-primary");
+}
+
+function uploadToCloud() {
+  const token = document.getElementById("cloud-token").value;
+  const fileInput = document.getElementById("pdfFileInput");
+
+  if (!fileInput.files.length) {
+    alert("PDF 파일을 선택해주세요.");
+    return;
   }
 
-  async function uploadToCloud() {
-    const token = document.getElementById("cloudToken").value;
-    const fileInput = document.getElementById("pdfFileInput");
-    const result = document.getElementById("uploadResult");
+  const file = fileInput.files[0];
+  const reader = new FileReader();
 
-    if (!selectedProvider) {
-      alert("저장할 클라우드를 선택해주세요.");
-      return;
+  reader.onload = async () => {
+    const base64Content = reader.result.split(",")[1];
+    try {
+      const response = await fetch("/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider: selectedProvider,
+          access_token: token,
+          filename: file.name,
+          file_content: atob(base64Content)
+        })
+      });
+      const result = await response.text();
+      document.getElementById("cloud-upload-result").innerText = result;
+    } catch (error) {
+      document.getElementById("cloud-upload-result").innerText = "에러 발생: " + error.message;
     }
+  };
 
-    if (!fileInput.files.length) {
-      alert("PDF 파일을 선택해주세요.");
-      return;
-    }
-
-    const file = fileInput.files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const base64Content = reader.result.split(",")[1];
-      try {
-        result.textContent = "⏳ 업로드 중...";
-        const response = await fetch("/upload", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            provider: selectedProvider,
-            access_token: token,
-            filename: file.name,
-            file_content: atob(base64Content)
-          })
-        });
-
-        const resText = await response.text();
-        result.innerHTML = `✅ 업로드 완료: <code>${resText}</code>`;
-      } catch (error) {
-        result.innerText = "❌ 에러 발생: " + error.message;
-      }
-    };
-    reader.readAsDataURL(file);
-  }
+  reader.readAsDataURL(file);
+}
 </script>
-
-
-
-
-
-
-
-
 
                     <!-- Processing Options -->
                     <section class="options-card mb-4">
