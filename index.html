@@ -1,6 +1,24 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+    <meta charset="UTF-8">
+  <title>파일 업로드</title>
+</head>
+<body>
+  <h1>파일 업로드</h1>
+  <form id="uploadForm">
+    <label>Provider:
+      <select id="provider">
+        <option value="google">Google Drive</option>
+        <option value="dropbox">Dropbox</option>
+      </select>
+    </label><br>
+    <label>Access Token: <input type="text" id="access_token" /></label><br>
+    <label>파일: <input type="file" id="fileInput" /></label><br>
+    <button type="submit">업로드</button>
+  </form>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>무료 PDF 변환기 | 300DPI PDF→JPG, PNG | WebP 압축</title>
@@ -1657,5 +1675,30 @@
     <div id="language-selector-container" style="position: fixed; top: 20px; left: 20px; z-index: 9999;">
         <!-- Language selector will be inserted here -->
     </div>
+    <script>
+  document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const fileInput = document.getElementById("fileInput").files[0];
+    const reader = new FileReader();
+    reader.onload = async () => {
+      const fileContent = reader.result.split(",")[1];
+      const res = await fetch("/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider: document.getElementById("provider").value,
+          access_token: document.getElementById("access_token").value,
+          filename: fileInput.name,
+          file_content: atob(fileContent)
+        })
+      });
+
+      const data = await res.text();
+      document.getElementById("result").textContent = data;
+    };
+    reader.readAsDataURL(fileInput);
+  });
+</script>
+
 </body>
 </html>
