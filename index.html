@@ -466,7 +466,7 @@
                         </div>
                     </div>
 
-                   <div class="upload-card-body" style="background-color: #f4f6f7; border-radius: 12px; padding: 24px; margin-bottom: 40px;">
+                  <div class="upload-card-body" style="background-color: #f4f6f7; border-radius: 12px; padding: 24px; margin-bottom: 80px;">
   <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
     <h2 class="text-dark mb-0" style="color: #1f2d3d; font-weight: bold;">📂 PDF 파일 업로드하기</h2>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-dark" id="uploadChevron" aria-hidden="true" style="transition: transform 0.3s; transform: rotate(180deg);">
@@ -504,14 +504,12 @@
 
         <div class="cloud-upload-section mt-4 text-center">
           <label for="cloud-provider" class="form-label fw-bold">클라우드 저장 위치 선택:</label>
-          <div class="dropdown d-inline-block">
-            <select class="form-select w-auto d-inline-block" id="cloud-provider">
-              <option value="google">Google Drive</option>
-              <option value="dropbox">Dropbox</option>
-            </select>
-          </div>
+          <select class="form-select w-auto mx-auto mb-3" id="cloud-provider">
+            <option value="google">Google Drive</option>
+            <option value="dropbox">Dropbox</option>
+          </select>
 
-          <input type="text" id="cloud-token" class="form-control mt-3 mx-auto" placeholder="Access Token 입력" required style="max-width: 400px;">
+          <input type="text" id="cloud-token" class="form-control mt-2 mx-auto" placeholder="Access Token 입력" required style="max-width: 400px;">
           <button type="button" class="btn btn-success mt-3" onclick="uploadToCloud()">클라우드에 저장</button>
           <div id="cloud-upload-result" class="mt-2 text-muted small"></div>
         </div>
@@ -578,6 +576,7 @@ function uploadToCloud() {
   reader.readAsDataURL(file);
 }
 </script>
+
 
 
 
