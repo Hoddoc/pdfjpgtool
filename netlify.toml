@@ -1,0 +1,13 @@
+[build]
+  functions = "netlify/functions"
+  publish = "."
+
+[[redirects]]
+  from = "/auth/google"
+  to = "/.netlify/functions/auth-google"
+  status = 200
+
+[[redirects]]
+  from = "/auth/dropbox"
+  to = "/.netlify/functions/auth-dropbox"
+  status = 200
