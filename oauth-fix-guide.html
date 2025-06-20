@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth 연결 차단 해결 가이드</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2E5D4B 0%, #1a3d2e 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .alert {
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid;
+        }
+        .alert-danger {
+            background: rgba(244, 67, 54, 0.2);
+            border-color: #f44336;
+        }
+        .alert-success {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4CAF50;
+        }
+        .alert-info {
+            background: rgba(33, 150, 243, 0.2);
+            border-color: #2196F3;
+        }
+        .code-block {
+            background: rgba(0,0,0,0.4);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .step {
+            margin: 25px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+        }
+        .step-number {
+            background: #4CAF50;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 5px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .btn-primary {
+            background: #2196F3;
+        }
+        .btn-primary:hover {
+            background: #1976D2;
+        }
+        h1, h2, h3 {
+            color: #ffffff;
+        }
+        .domain-info {
+            background: rgba(255, 193, 7, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #FFC107;
+            margin: 15px 0;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .highlight {
+            background: rgba(255, 255, 0, 0.2);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OAuth 연결 차단 문제 해결 가이드</h1>
+        
+        <div class="alert alert-danger">
+            <h2>현재 문제 상황</h2>
+            <p><strong>문제:</strong> "사이트에 연결할 수 없고 차단" 오류가 발생합니다.</p>
+            <p><strong>원인:</strong> Dropbox와 Google OAuth 앱에서 새로운 Replit 도메인을 인식하지 못하기 때문입니다.</p>
+        </div>
+
+        <div class="domain-info">
+            <h3>도메인 변경 사항</h3>
+            <p><strong>이전 도메인:</strong> <code>workspace.7rawone.repl.co</code></p>
+            <p><strong>현재 도메인:</strong> <code>3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app</code></p>
+        </div>
+
+        <div class="alert alert-info">
+            <h2>해결 순서</h2>
+            <p>아래 단계를 순서대로 따라하면 OAuth 연결 문제가 해결됩니다:</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">1</span> Dropbox 앱 설정 업데이트</h3>
+            <p><strong>접속:</strong> <a href="https://www.dropbox.com/developers/apps" target="_blank" style="color: #4CAF50;">https://www.dropbox.com/developers/apps</a></p>
+            <ol>
+                <li>Dropbox 계정으로 로그인</li>
+                <li>앱 목록에서 클라이언트 ID가 <span class="highlight">ox2nxs1balk4l4i</span>인 앱 찾기</li>
+                <li>"OAuth 2" 또는 "Settings" 섹션으로 이동</li>
+                <li>"Redirect URIs" 필드에서 기존 URI 제거</li>
+                <li>새로운 URI 추가:</li>
+            </ol>
+            <div class="code-block">
+https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/dropbox/callback
+            </div>
+            <p><strong>중요:</strong> 정확히 복사해서 붙여넣으세요. 끝에 공백이나 추가 문자가 있으면 안됩니다.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">2</span> Google OAuth 앱 설정 업데이트</h3>
+            <p><strong>접속:</strong> <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="color: #4CAF50;">https://console.cloud.google.com/apis/credentials</a></p>
+            <ol>
+                <li>Google 계정으로 로그인</li>
+                <li>OAuth 2.0 클라이언트 ID 목록에서 다음 ID를 가진 항목 찾기:</li>
+            </ol>
+            <div class="code-block">
+330202967434-9u0gnm9ud2f3oasfp0npn6br4h93qs8i.apps.googleusercontent.com
+            </div>
+            <ol start="3">
+                <li>해당 클라이언트 ID를 클릭하여 편집</li>
+                <li>"승인된 리디렉션 URI" 섹션에서 기존 URI 제거</li>
+                <li>새로운 URI 추가:</li>
+            </ol>
+            <div class="code-block">
+https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/google/callback
+            </div>
+            <p><strong>중요:</strong> "저장" 버튼을 꼭 눌러야 합니다.</p>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">3</span> 변경사항 적용 대기</h3>
+            <p>OAuth 설정 변경 후 몇 분 정도 기다려야 할 수 있습니다:</p>
+            <ul>
+                <li>Dropbox: 보통 1-2분 내 적용</li>
+                <li>Google: 5-10분 정도 소요될 수 있음</li>
+                <li>브라우저 캐시 삭제 권장</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3><span class="step-number">4</span> 연결 테스트</h3>
+            <p>설정 완료 후 아래 버튼으로 테스트:</p>
+            <a href="/auth/dropbox" class="btn" target="_blank">Dropbox 연결 테스트</a>
+            <a href="/auth/google" class="btn btn-primary" target="_blank">Google Drive 연결 테스트</a>
+        </div>
+
+        <div class="alert alert-success">
+            <h2>문제 해결 확인</h2>
+            <p>설정이 올바르게 되었다면:</p>
+            <ul>
+                <li>OAuth 버튼 클릭 시 Dropbox/Google 로그인 페이지로 이동</li>
+                <li>"사이트에 연결할 수 없음" 오류가 사라짐</li>
+                <li>권한 승인 후 정상적으로 앱으로 돌아옴</li>
+            </ul>
+        </div>
+
+        <div class="alert alert-info">
+            <h2>추가 도움이 필요한 경우</h2>
+            <p>위 단계를 따라해도 문제가 지속되면:</p>
+            <ul>
+                <li>브라우저를 완전히 닫았다가 다시 열어보세요</li>
+                <li>시크릿/프라이빗 브라우징 모드로 테스트해보세요</li>
+                <li>다른 브라우저로 시도해보세요</li>
+                <li>OAuth 앱 설정에서 URI가 정확히 입력되었는지 다시 확인하세요</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/" class="btn">메인 페이지로 돌아가기</a>
+            <a href="/oauth-test" class="btn btn-primary">OAuth 테스트 페이지</a>
+        </div>
+    </div>
+</body>
+</html>

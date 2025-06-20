@@ -1,0 +1,20 @@
+/* Optimized PDF Tool Styles */
+.upload-area-new{background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%);border:2px dashed #6c757d;border-radius:12px;padding:2rem;text-align:center;transition:all .3s ease;cursor:pointer;position:relative;overflow:hidden}
+.upload-area-new:hover{border-color:#007bff;background:linear-gradient(135deg,#e3f2fd 0%,#bbdefb 100%);transform:translateY(-2px)}
+.upload-area-new.dragover{border-color:#28a745;background:linear-gradient(135deg,#e8f5e8 0%,#c8e6c9 100%);transform:scale(1.02)}
+.upload-area-new.success{border-color:#28a745;background:linear-gradient(135deg,#d4edda 0%,#c3e6cb 100%)}
+.upload-area-new.error{border-color:#dc3545;background:linear-gradient(135deg,#f8d7da 0%,#f1b2b7 100%)}
+.upload-icon{color:#6c757d;margin-bottom:1rem}
+.upload-area-new:hover .upload-icon{color:#007bff;transform:scale(1.1)}
+.options-card{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:15px;border:1px solid rgba(255,255,255,.2)}
+.upload-card{background:#fff;border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,.1);border:none}
+.upload-card-body,.options-card-body{padding:2rem}
+.file-info-new{background:#f8f9fa;border:1px solid #dee2e6;border-radius:8px;padding:1rem;margin-top:1rem}
+.btn:hover{background-color:rgba(13,110,253,.1);transform:scale(1.01)}
+.section-hidden{display:none!important}
+.upload-card-body [onclick],.options-card-body [onclick],#guideSection [onclick]{transition:background-color .2s ease}
+.upload-card-body [onclick]:hover{background-color:rgba(0,0,0,.05);border-radius:8px;padding:8px;margin:-8px}
+.options-card-body [onclick]:hover{background-color:rgba(255,255,255,.1);border-radius:8px;padding:8px;margin:-8px}
+#guideSection [onclick]:hover{background-color:rgba(255,255,255,.1);border-radius:8px;padding:8px;margin:-8px}
+.visually-hidden{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media (max-width:768px){.upload-area{min-height:150px}}
