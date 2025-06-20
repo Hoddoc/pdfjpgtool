@@ -12,10 +12,11 @@ exports.handler = async (event, context) => {
       "Content-Type": "application/x-www-form-urlencoded"
     },
     body: new URLSearchParams({
-      code,
-      grant_type: "authorization_code",
-      redirect_uri: "https://pdfjpgtool.com/auth/dropbox/callback"
-    })
+  code,
+  grant_type: "authorization_code",
+  redirect_uri: "https://pdfjpgtool.com/auth/dropbox/callback" // 
+})
+
   });
 
   const data = await response.json();
