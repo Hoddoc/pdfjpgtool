@@ -478,74 +478,163 @@
                         </div>
                     </div>
 
-                    <!-- PDF Upload Section -->
-                    <section class="upload-card" id="converter">
-                        <div class="upload-card-body">
-                            <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
-                                <h2 class="text-dark mb-0">PDF 파일 업로드하기</h2>
-                                <i data-feather="chevron-down" class="text-dark" id="uploadChevron" aria-hidden="true" style="transition: transform 0.3s ease;"></i>
-                            </div>
-                            <div id="uploadSection">
-                            <div class="upload-area-new" id="uploadArea">
-                                <label for="pdfFileInput" class="visually-hidden">PDF 파일 선택</label>
-                                <input type="file" id="pdfFileInput" accept=".pdf" class="form-control" style="display: none;" aria-label="PDF 파일 선택">
-                                <div class="text-center py-5">
-                                    <div class="upload-icon mb-4">
-                                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                                            <polyline points="14,2 14,8 20,8"></polyline>
-                                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                                            <polyline points="10,9 9,9 8,9"></polyline>
-                                        </svg>
-                                    </div>
-                                    
-                                    <div class="d-flex flex-column align-items-center gap-2">
-                                        <button type="button" class="btn btn-outline-primary btn-lg" id="selectFileBtn" onclick="document.getElementById('pdfFileInput').click()">
-                                            <i data-feather="folder" class="me-2" aria-hidden="true"></i>
-                                            PDF 파일 선택
-                                        </button>
-                                        
-                                        <div class="d-flex flex-wrap gap-2 justify-content-center">
-                                            <button id="dropbox-btn" class="btn btn-sm btn-outline-primary" onclick="openCloudStorage('dropbox')" title="Dropbox에서 가져오기">
-                                                <i data-feather="cloud" class="me-1" aria-hidden="true" style="width: 16px; height: 16px;"></i>
-                                                Dropbox
-                                            </button>
-                                            <button id="googledrive-btn" class="btn btn-sm btn-outline-success" onclick="openCloudStorage('googledrive')" title="Google Drive에서 가져오기">
-                                                <i data-feather="hard-drive" class="me-1" aria-hidden="true" style="width: 16px; height: 16px;"></i>
-                                                Drive
-                                            </button>
+                     <div class="upload-card-body">
+  <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
+    <h2 class="text-dark mb-0">PDF 파일 업로드하기</h2>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-dark" id="uploadChevron" aria-hidden="true" style="transition: transform 0.3s; transform: rotate(180deg);"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
 
-                                            <button class="btn btn-outline-secondary btn-sm" onclick="showCloudSetup()" title="클라우드 연동 설정">
-                                                <i data-feather="settings" class="me-1" aria-hidden="true" style="width: 16px; height: 16px;"></i>
-                                                설정
-                                            </button>
-                                        </div>
-                                    </div>
-                                    
-                                    <p class="upload-text mb-2 mt-3">또는 PDF 파일을 여기로 드래그하세요</p>
-                                    <small class="text-muted d-block">클라우드 연결 상태: <span id="cloud-status-indicator">연결 확인 중...</span></small>
-                                    <small class="text-muted">PDF 파일만 지원 • 최대 50MB • 빠르고 안전한 변환</small>
-                                </div>
-                            </div>
-                            
-                            <div id="fileInfo" class="file-info-new" style="display: none;">
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <i data-feather="file" class="me-3 text-primary" aria-hidden="true"></i>
-                                        <div>
-                                            <div id="fileName" class="fw-bold"></div>
-                                            <small class="text-muted">업로드 완료 - 변환 준비됨</small>
-                                        </div>
-                                    </div>
-                                    <button type="button" class="btn btn-sm btn-outline-danger" id="removeFile" aria-label="파일 제거">
-                                        <i data-feather="x" size="16" aria-hidden="true"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </section>
+  <div id="uploadSection" class="">
+    <div class="upload-area-new" id="uploadArea">
+      <label for="pdfFileInput" class="visually-hidden">PDF 파일 선택</label>
+      <input type="file" id="pdfFileInput" accept=".pdf" class="form-control" style="display: none;" aria-label="PDF 파일 선택">
+
+      <div class="text-center py-5">
+        <div class="upload-icon mb-4">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14,2 14,8 20,8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10,9 9,9 8,9"></polyline>
+          </svg>
+        </div>
+
+        <div class="d-flex flex-column align-items-center gap-2">
+          <button type="button" class="btn btn-outline-primary btn-lg" id="selectFileBtn" onclick="document.getElementById('pdfFileInput').click()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder me-2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+            PDF 파일 선택
+          </button>
+
+          <div class="d-flex flex-wrap gap-2 justify-content-center">
+            <button id="dropbox-btn" class="btn btn-sm" onclick="openCloudStorage('dropbox')" title="Dropbox에서 가져오기" style="background: rgb(0, 97, 255); color: white; border: 1px solid rgb(0, 97, 255);">
+              Dropbox
+            </button>
+            <button id="googledrive-btn" class="btn btn-sm" onclick="openCloudStorage('googledrive')" title="Google Drive에서 가져오기" style="background: rgb(66, 133, 244); color: white; border: 1px solid rgb(66, 133, 244);">
+              Drive
+            </button>
+            <button class="btn btn-outline-secondary btn-sm" onclick="showCloudSetup()" title="클라우드 연동 설정">
+              설정
+            </button>
+          </div>
+        </div>
+
+        <p class="upload-text mb-2 mt-3">또는 PDF 파일을 여기로 드래그하세요</p>
+        <small class="text-muted d-block">클라우드 연결 상태: <span id="cloud-status-indicator" style="color: rgb(40, 167, 69);">Dropbox, Drive 연결됨</span></small>
+        <small class="text-muted">PDF 파일만 지원 • 최대 50MB • 빠르고 안전한 변환</small>
+
+        <!-- 클라우드 업로드 UI 추가 -->
+        <div class="cloud-upload-section mt-4">
+          <label for="cloud-provider" class="form-label">클라우드 저장 위치 선택:</label>
+          <select id="cloud-provider" class="form-select w-auto d-inline-block">
+            <option value="google">Google Drive</option>
+            <option value="dropbox">Dropbox</option>
+          </select>
+
+          <input type="text" id="cloud-token" class="form-control mt-2" placeholder="Access Token 입력" required style="max-width: 400px; margin: 0 auto;">
+
+          <button type="button" class="btn btn-success mt-3" onclick="uploadToCloud()">클라우드에 저장</button>
+
+          <div id="cloud-upload-result" class="mt-2 text-muted small"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="fileInfo" class="file-info-new" style="display: none;">
+      <div class="d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file me-3 text-primary" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+          <div>
+            <div id="fileName" class="fw-bold"></div>
+            <small class="text-muted">업로드 완료 - 변환 준비됨</small>
+          </div>
+        </div>
+        <button type="button" class="btn btn-sm btn-outline-danger" id="removeFile" aria-label="파일 제거">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x" size="16" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function uploadToCloud() {
+  const provider = document.getElementById("cloud-provider").value;
+  const token = document.getElementById("cloud-token").value;
+  const fileInput = document.getElementById("pdfFileInput");
+
+  if (!fileInput.files.length) {
+    alert("PDF 파일을 선택해주세요.");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+
+  reader.onload = async () => {
+    const base64Content = reader.result.split(",")[1];
+    try {
+      const response = await fetch("/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider,
+          access_token: token,
+          filename: file.name,
+          file_content: atob(base64Content)
+        })
+      });
+      const result = await response.text();
+      document.getElementById("cloud-upload-result").innerText = result;
+    } catch (error) {
+      document.getElementById("cloud-upload-result").innerText = "에러 발생: " + error.message;
+    }
+  };
+
+  reader.readAsDataURL(file);
+}
+</script>
+
+
+                    
+
+<script>
+function uploadToCloud() {
+  const provider = document.getElementById("cloud-provider").value;
+  const token = document.getElementById("cloud-token").value;
+  const fileInput = document.getElementById("pdfFileInput");
+
+  if (!fileInput.files.length) {
+    alert("PDF 파일을 선택해주세요.");
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+
+  reader.onload = async () => {
+    const base64Content = reader.result.split(",")[1];
+    try {
+      const response = await fetch("/upload", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          provider,
+          access_token: token,
+          filename: file.name,
+          file_content: atob(base64Content)
+        })
+      });
+      const result = await response.text();
+      document.getElementById("cloud-upload-result").innerText = result;
+    } catch (error) {
+      document.getElementById("cloud-upload-result").innerText = "에러 발생: " + error.message;
+    }
+  };
+
+  reader.readAsDataURL(file);
+}
+</script>
 
                     <!-- Processing Options -->
                     <section class="options-card mb-4">
@@ -1699,125 +1788,6 @@
     reader.readAsDataURL(fileInput);
   });
 </script>
-
-
-    <div class="upload-card-body">
-  <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
-    <h2 class="text-dark mb-0">PDF 파일 업로드하기</h2>
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-dark" id="uploadChevron" aria-hidden="true" style="transition: transform 0.3s; transform: rotate(180deg);"><polyline points="6 9 12 15 18 9"></polyline></svg>
-  </div>
-
-  <div id="uploadSection" class="">
-    <div class="upload-area-new" id="uploadArea">
-      <label for="pdfFileInput" class="visually-hidden">PDF 파일 선택</label>
-      <input type="file" id="pdfFileInput" accept=".pdf" class="form-control" style="display: none;" aria-label="PDF 파일 선택">
-
-      <div class="text-center py-5">
-        <div class="upload-icon mb-4">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14,2 14,8 20,8"></polyline>
-            <line x1="16" y1="13" x2="8" y2="13"></line>
-            <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10,9 9,9 8,9"></polyline>
-          </svg>
-        </div>
-
-        <div class="d-flex flex-column align-items-center gap-2">
-          <button type="button" class="btn btn-outline-primary btn-lg" id="selectFileBtn" onclick="document.getElementById('pdfFileInput').click()">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-folder me-2" aria-hidden="true"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-            PDF 파일 선택
-          </button>
-
-          <div class="d-flex flex-wrap gap-2 justify-content-center">
-            <button id="dropbox-btn" class="btn btn-sm" onclick="openCloudStorage('dropbox')" title="Dropbox에서 가져오기" style="background: rgb(0, 97, 255); color: white; border: 1px solid rgb(0, 97, 255);">
-              Dropbox
-            </button>
-            <button id="googledrive-btn" class="btn btn-sm" onclick="openCloudStorage('googledrive')" title="Google Drive에서 가져오기" style="background: rgb(66, 133, 244); color: white; border: 1px solid rgb(66, 133, 244);">
-              Drive
-            </button>
-            <button class="btn btn-outline-secondary btn-sm" onclick="showCloudSetup()" title="클라우드 연동 설정">
-              설정
-            </button>
-          </div>
-        </div>
-
-        <p class="upload-text mb-2 mt-3">또는 PDF 파일을 여기로 드래그하세요</p>
-        <small class="text-muted d-block">클라우드 연결 상태: <span id="cloud-status-indicator" style="color: rgb(40, 167, 69);">Dropbox, Drive 연결됨</span></small>
-        <small class="text-muted">PDF 파일만 지원 • 최대 50MB • 빠르고 안전한 변환</small>
-
-        <!-- 클라우드 업로드 UI 추가 -->
-        <div class="cloud-upload-section mt-4">
-          <label for="cloud-provider" class="form-label">클라우드 저장 위치 선택:</label>
-          <select id="cloud-provider" class="form-select w-auto d-inline-block">
-            <option value="google">Google Drive</option>
-            <option value="dropbox">Dropbox</option>
-          </select>
-
-          <input type="text" id="cloud-token" class="form-control mt-2" placeholder="Access Token 입력" required style="max-width: 400px; margin: 0 auto;">
-
-          <button type="button" class="btn btn-success mt-3" onclick="uploadToCloud()">클라우드에 저장</button>
-
-          <div id="cloud-upload-result" class="mt-2 text-muted small"></div>
-        </div>
-      </div>
-    </div>
-
-    <div id="fileInfo" class="file-info-new" style="display: none;">
-      <div class="d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file me-3 text-primary" aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-          <div>
-            <div id="fileName" class="fw-bold"></div>
-            <small class="text-muted">업로드 완료 - 변환 준비됨</small>
-          </div>
-        </div>
-        <button type="button" class="btn btn-sm btn-outline-danger" id="removeFile" aria-label="파일 제거">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x" size="16" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<script>
-function uploadToCloud() {
-  const provider = document.getElementById("cloud-provider").value;
-  const token = document.getElementById("cloud-token").value;
-  const fileInput = document.getElementById("pdfFileInput");
-
-  if (!fileInput.files.length) {
-    alert("PDF 파일을 선택해주세요.");
-    return;
-  }
-
-  const file = fileInput.files[0];
-  const reader = new FileReader();
-
-  reader.onload = async () => {
-    const base64Content = reader.result.split(",")[1];
-    try {
-      const response = await fetch("/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          provider,
-          access_token: token,
-          filename: file.name,
-          file_content: atob(base64Content)
-        })
-      });
-      const result = await response.text();
-      document.getElementById("cloud-upload-result").innerText = result;
-    } catch (error) {
-      document.getElementById("cloud-upload-result").innerText = "에러 발생: " + error.message;
-    }
-  };
-
-  reader.readAsDataURL(file);
-}
-</script>
-
-    
+   
 </body>
 </html>
