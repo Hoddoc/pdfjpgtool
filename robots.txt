@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+Disallow:
+
+# Sitemap location
+Sitemap: https://pdfjpgtool.com/sitemap.xml
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1
+
+# Allow specific files and assets
+Allow: /sitemap.xml
+Allow: /rss.xml
+Allow: /robots.txt
+Allow: /ads.txt
+Allow: /style.css
+Allow: /script.js
+Allow: /favicon.ico
+
+# Allow PDF.js worker files
+Allow: /pdf.worker.min.js
+
+# Search engine specific directives
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Yeti
+Allow: /
+
+# Block unnecessary crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /

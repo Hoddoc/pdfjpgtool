@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    
+    <!-- Main page -->
+    <url>
+        <loc>https://pdfjpgtool.com/</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- PDF to JPG conversion section -->
+    <url>
+        <loc>https://pdfjpgtool.com/#pdf-to-jpg</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- PDF to PNG conversion section -->
+    <url>
+        <loc>https://pdfjpgtool.com/#pdf-to-png</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- JPG to WebP conversion section -->
+    <url>
+        <loc>https://pdfjpgtool.com/#jpg-to-webp</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Image extraction section -->
+    <url>
+        <loc>https://pdfjpgtool.com/#extract-images</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Usage instructions -->
+    <url>
+        <loc>https://pdfjpgtool.com/#usage-guide</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- SEO files -->
+    <url>
+        <loc>https://pdfjpgtool.com/sitemap.xml</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.3</priority>
+    </url>
+    
+    <url>
+        <loc>https://pdfjpgtool.com/rss.xml</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.4</priority>
+    </url>
+    
+    <url>
+        <loc>https://pdfjpgtool.com/robots.txt</loc>
+        <lastmod>2025-06-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.2</priority>
+    </url>
+    
+</urlset>

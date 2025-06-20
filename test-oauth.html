@@ -1,0 +1,216 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background: #2E5D4B;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background: #1e3d2b;
+        }
+        .error {
+            background: #ffe6e6;
+            color: #d00;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #e6ffe6;
+            color: #060;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .info {
+            background: #e6f3ff;
+            color: #0066cc;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .token {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        .url-box {
+            background: #f8f8f8;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            border: 1px solid #ddd;
+            margin: 5px 0;
+            word-break: break-all;
+        }
+        .step {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            border-left: 4px solid #2E5D4B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OAuth 설정 문제 해결 가이드</h1>
+        
+        <div class="error">
+            <strong>현재 문제:</strong><br>
+            DNS_PROBE_FINISHED_NXDOMAIN 오류가 발생하고 있습니다. 이는 OAuth 앱에서 올바른 리다이렉트 URI가 설정되지 않았기 때문입니다.
+        </div>
+
+        <div class="info">
+            <strong>현재 서버 정보:</strong><br>
+            - 서버 URL: <code>https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app</code><br>
+            - Dropbox 콜백: <code>https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/dropbox/callback</code><br>
+            - Google 콜백: <code>https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/google/callback</code>
+        </div>
+
+        <h2>🔧 필수 해결 단계</h2>
+        
+        <div class="step">
+            <h3>1단계: Dropbox 앱 설정 수정</h3>
+            <p>1. <a href="https://www.dropbox.com/developers/apps" target="_blank">Dropbox Developers Console</a> 접속</p>
+            <p>2. 앱 <strong>ox2nxs1balk4l4i</strong> 선택</p>
+            <p>3. "OAuth 2" 섹션에서 <strong>기존 리다이렉트 URI를 모두 삭제</strong></p>
+            <p>4. 새로운 리다이렉트 URI 추가:</p>
+            <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/dropbox/callback</div>
+            <p>5. "Save" 또는 "저장" 클릭</p>
+        </div>
+
+        <div class="step">
+            <h3>2단계: Google OAuth 앱 설정 수정</h3>
+            <p>1. <a href="https://console.cloud.google.com/apis/credentials" target="_blank">Google Cloud Console</a> 접속</p>
+            <p>2. OAuth 2.0 클라이언트 ID <strong>330202967434-9u0gnm9ud2f3oasfp0npn6br4h93qs8i</strong> 선택</p>
+            <p>3. "승인된 리디렉션 URI"에서 <strong>기존 URI를 모두 삭제</strong></p>
+            <p>4. 새로운 리디렉션 URI 추가:</p>
+            <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/google/callback</div>
+            <p>5. "저장" 클릭</p>
+        </div>
+
+        <div class="step">
+            <h3>3단계: 설정 완료 후 테스트</h3>
+            <p>위 설정을 완료한 후 아래 버튼으로 테스트하세요:</p>
+            <button class="btn" onclick="testDropbox()">Dropbox OAuth 테스트</button>
+            <button class="btn" onclick="testGoogle()">Google OAuth 테스트</button>
+        </div>
+        
+        <div id="results"></div>
+
+        <div class="info">
+            <h3>⚠️ 중요 사항</h3>
+            <ul>
+                <li><strong>기존 .repl.co 도메인을 반드시 삭제해야 합니다</strong></li>
+                <li>새로운 .id.replit.app 도메인만 추가하세요</li>
+                <li>설정 변경 후 최대 10분까지 적용 시간이 걸릴 수 있습니다</li>
+                <li>브라우저 캐시를 지우고 다시 시도해보세요</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function testDropbox() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<div class="info">Dropbox OAuth 테스트 중...</div>';
+            
+            const popup = window.open('https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/auth/dropbox', 'dropbox_test', 'width=600,height=700');
+            
+            const messageHandler = (event) => {
+                if (event.data.type === 'dropbox_auth_success') {
+                    results.innerHTML = `
+                        <div class="success">
+                            <strong>✅ Dropbox OAuth 성공!</strong><br>
+                            Access Token: <div class="token">${event.data.token}</div>
+                        </div>
+                    `;
+                    window.removeEventListener('message', messageHandler);
+                } else if (event.data.type === 'dropbox_auth_error') {
+                    results.innerHTML = `
+                        <div class="error">
+                            <strong>❌ Dropbox OAuth 실패:</strong><br>
+                            ${event.data.error}
+                        </div>
+                    `;
+                    window.removeEventListener('message', messageHandler);
+                }
+            };
+            
+            window.addEventListener('message', messageHandler);
+        }
+
+        function testGoogle() {
+            const results = document.getElementById('results');
+            results.innerHTML = '<div class="info">Google OAuth 테스트 중...</div>';
+            
+            const popup = window.open('https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/auth/google', 'google_test', 'width=600,height=700');
+            
+            const messageHandler = (event) => {
+                if (event.data.type === 'google_auth_success') {
+                    results.innerHTML = `
+                        <div class="success">
+                            <strong>✅ Google OAuth 성공!</strong><br>
+                            Access Token: <div class="token">${event.data.token}</div>
+                            ${event.data.refresh_token ? `<br>Refresh Token: <div class="token">${event.data.refresh_token}</div>` : ''}
+                        </div>
+                    `;
+                    window.removeEventListener('message', messageHandler);
+                } else if (event.data.type === 'google_auth_error') {
+                    results.innerHTML = `
+                        <div class="error">
+                            <strong>❌ Google OAuth 실패:</strong><br>
+                            ${event.data.error}
+                        </div>
+                    `;
+                    window.removeEventListener('message', messageHandler);
+                }
+            };
+            
+            window.addEventListener('message', messageHandler);
+        }
+
+        // 페이지 로드 시 현재 상태 확인
+        window.addEventListener('load', function() {
+            const results = document.getElementById('results');
+            results.innerHTML = `
+                <div class="info">
+                    <strong>📋 체크리스트:</strong><br>
+                    1. Dropbox 앱에서 기존 URI 삭제 후 새 URI 추가 ✏️<br>
+                    2. Google OAuth 앱에서 기존 URI 삭제 후 새 URI 추가 ✏️<br>
+                    3. 설정 저장 및 테스트 진행 ⏳
+                </div>
+            `;
+        });
+    </script>
+</body>
+</html>

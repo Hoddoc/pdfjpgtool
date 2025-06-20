@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OAuth 설정 테스트</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #2E5D4B 0%, #1a3d2e 100%);
+            color: white;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .config-info {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        .error-box {
+            background: rgba(244, 67, 54, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #f44336;
+        }
+        .success-box {
+            background: rgba(76, 175, 80, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        code {
+            background: rgba(0,0,0,0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .url-box {
+            background: rgba(0,0,0,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+        }
+        .btn {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+        .btn:hover {
+            background: #45a049;
+        }
+        .btn-danger {
+            background: #f44336;
+        }
+        .btn-danger:hover {
+            background: #da190b;
+        }
+        h1, h2 {
+            color: #ffffff;
+        }
+        .step {
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+        }
+        .step-number {
+            background: #4CAF50;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OAuth 설정 진단 및 테스트</h1>
+        
+        <div class="error-box">
+            <h2>현재 문제</h2>
+            <p>리다이렉트 오류가 발생하고 있습니다. 이는 Dropbox와 Google OAuth 앱에서 올바른 리다이렉트 URI가 설정되지 않았기 때문입니다.</p>
+        </div>
+
+        <div class="config-info">
+            <h2>현재 서버 설정</h2>
+            <p><strong>기본 URL:</strong></p>
+            <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app</div>
+            
+            <p><strong>Dropbox 콜백 URL:</strong></p>
+            <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/dropbox/callback</div>
+            
+            <p><strong>Google 콜백 URL:</strong></p>
+            <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/google/callback</div>
+        </div>
+
+        <div class="success-box">
+            <h2>해결 방법</h2>
+            <p>아래 단계를 따라 OAuth 앱 설정을 업데이트하세요:</p>
+            
+            <div class="step">
+                <span class="step-number">1</span>
+                <strong>Dropbox 앱 설정</strong>
+                <p>
+                    1. <a href="https://www.dropbox.com/developers/apps" target="_blank" style="color: #4CAF50;">Dropbox 개발자 콘솔</a>에 로그인<br>
+                    2. 클라이언트 ID <code>ox2nxs1balk4l4i</code>를 가진 앱 찾기<br>
+                    3. "OAuth 2" 섹션에서 리다이렉트 URI 업데이트:<br>
+                    <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/dropbox/callback</div>
+                    4. 기존의 <code>workspace.7rawone.repl.co</code> URI 제거
+                </p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">2</span>
+                <strong>Google OAuth 앱 설정</strong>
+                <p>
+                    1. <a href="https://console.cloud.google.com/apis/credentials" target="_blank" style="color: #4CAF50;">Google Cloud Console</a>에 로그인<br>
+                    2. 클라이언트 ID <code>330202967434-9u0gnm9ud2f3oasfp0npn6br4h93qs8i</code>를 가진 OAuth 2.0 클라이언트 찾기<br>
+                    3. "승인된 리디렉션 URI"에서 업데이트:<br>
+                    <div class="url-box">https://3310ffde-0425-4fd5-97c8-2cf58ee38cff.id.replit.app/google/callback</div>
+                    4. 기존의 <code>workspace.7rawone.repl.co</code> URI 제거
+                </p>
+            </div>
+
+            <div class="step">
+                <span class="step-number">3</span>
+                <strong>테스트</strong>
+                <p>설정 완료 후 아래 버튼으로 테스트하세요:</p>
+                <a href="/auth/dropbox" class="btn" target="_blank">Dropbox 연결 테스트</a>
+                <a href="/auth/google" class="btn" target="_blank">Google Drive 연결 테스트</a>
+            </div>
+        </div>
+
+        <div class="config-info">
+            <h2>중요 사항</h2>
+            <ul>
+                <li>Replit 도메인이 <code>.repl.co</code>에서 <code>.id.replit.app</code>으로 변경되었습니다</li>
+                <li>두 OAuth 앱 모두에서 새로운 리다이렉트 URI를 설정해야 합니다</li>
+                <li>변경사항 적용 후 몇 분 정도 기다려야 할 수 있습니다</li>
+                <li>브라우저 캐시를 지우면 도움이 될 수 있습니다</li>
+            </ul>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="/" class="btn">메인 페이지로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>
