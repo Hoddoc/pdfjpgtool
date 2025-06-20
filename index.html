@@ -466,7 +466,8 @@
                             </div>
                         </div>
                     </div>
-<div class="upload-card-body" style="background-color: #f4f6f7; border-radius: 12px; padding: 24px;">
+
+                   <div class="upload-card-body" style="background-color: #f4f6f7; border-radius: 12px; padding: 24px; margin-bottom: 40px;">
   <div class="d-flex align-items-center justify-content-between mb-4" style="cursor: pointer;" onclick="toggleSection('uploadSection')">
     <h2 class="text-dark mb-0" style="color: #1f2d3d; font-weight: bold;">📂 PDF 파일 업로드하기</h2>
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down text-dark" id="uploadChevron" aria-hidden="true" style="transition: transform 0.3s; transform: rotate(180deg);">
@@ -518,7 +519,7 @@
       </div>
     </div>
 
-    <div id="fileInfo" class="file-info-new" style="display: none;">
+    <div id="fileInfo" class="file-info-new mt-5" style="display: none;">
       <div class="d-flex align-items-center justify-content-between">
         <div class="d-flex align-items-center">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file me-3 text-primary" aria-hidden="true">
@@ -578,6 +579,7 @@ function uploadToCloud() {
   reader.readAsDataURL(file);
 }
 </script>
+
 
 
 
