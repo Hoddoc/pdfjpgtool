@@ -7,17 +7,16 @@
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://pdfjpgtool.com/images/banner.jpg</image:loc>
+      <image:loc>https://pdfjpgtool.com/og-image.jpg</image:loc>
+      <image:caption>PDF JPG 변환기 – 고해상도 300DPI 이미지 변환</image:caption>
     </image:image>
   </url>
-  
   <url>
     <loc>https://pdfjpgtool.com/sitemap.xml</loc>
     <lastmod>2025-06-17T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
-  
   <url>
     <loc>https://pdfjpgtool.com/rss.xml</loc>
     <lastmod>2025-06-17T00:00:00Z</lastmod>
