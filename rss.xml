@@ -1,20 +1,19 @@
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>무료 PDF 변환기 – 300DPI 고품질</title>
+    <title>무료 PDF 변환기 – 핵심 업데이트</title>
     <link>https://pdfjpgtool.com/</link>
-    <description>300DPI PDF→JPG/PNG, JPG→WebP 변환 무료 툴</description>
+    <description>PDF→JPG/PNG/WebP 변환, 새로운 기능, 사용법 가이드 등 최신 소식 제공</description>
     <language>ko-KR</language>
-    <lastBuildDate>Mon, 22 Jun 2025 09:00:00 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 22 Jun 2025 09:00:00 +0900</lastBuildDate>
     <atom:link href="https://pdfjpgtool.com/rss.xml" rel="self" type="application/rss+xml"/>
-    <!-- PubSubHubbub hub 링크 포함 예: -->
-    <link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
+
     <item>
-      <title>엔터프라이즈급 PDF 변환기 출시!</title>
+      <title>PDF 이미지 변환기 300DPI 지원 출시</title>
       <link>https://pdfjpgtool.com/#multi-format-launch</link>
       <guid isPermaLink="true">https://pdfjpgtool.com/#multi-format-launch</guid>
-      <pubDate>Mon, 22 Jun 2025 08:50:00 +0900</pubDate>
-      <description>300DPI 인쇄급 PDF→JPG/PNG 변환 기능 자세히 보기…</description>
+      <pubDate>Sun, 22 Jun 2025 08:50:00 +0900</pubDate>
+      <description>300DPI 인쇄 품질 PDF→JPG/PNG 변환 기능이 추가되었습니다. 자세한 내용은 클릭하여 확인하세요.</description>
     </item>
-    <!-- 기타 item 요소들 반복 -->
+    <!-- 추가 업데이트 항목들 -->
   </channel>
 </rss>
