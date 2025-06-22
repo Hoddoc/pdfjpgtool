@@ -1,63 +1,20 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-    <channel>
-        <title>무료 PDF 변환기 - 300DPI 고품질 PDF→JPG, PNG 변환</title>
-        <link>https://pdfjpgtool.com/</link>
-        <description>고성능 PDF 이미지 변환 엔진으로 300DPI 품질의 JPG, PNG 변환과 JPG→WebP 압축을 제공하는 무료 온라인 도구. 워터마크 없음, 브라우저 안전 처리.</description>
-        <language>ko-KR</language>
-        <lastBuildDate>Mon, 17 Jun 2025 00:00:00 +0900</lastBuildDate>
-        <atom:link href="https://pdfjpgtool.com/rss.xml" rel="self" type="application/rss+xml"/>
-        <generator>PDF 이미지 변환 도구</generator>
-        <webMaster>dosee007@naver.com</webMaster>
-        <managingEditor>dosee007@naver.com</managingEditor>
-        <category>Technology</category>
-        <category>File Conversion</category>
-        <category>PDF Tools</category>
-        
-        <item>
-            <title>엔터프라이즈급 무료 PDF 변환기 - 300DPI 고품질 변환 지원</title>
-            <link>https://pdfjpgtool.com/</link>
-            <description><![CDATA[
-                <p>고성능 멀티 포맷 문서 변환 엔진으로 300DPI 인쇄급 품질의 PDF→JPG, PNG 변환과 JPG→WebP 차세대 압축을 제공합니다.</p>
-                <ul>
-                <li>300DPI 인쇄급 고화질 PDF→JPG 변환</li>
-                <li>무손실 PDF→PNG 변환 (투명도 지원)</li>
-                <li>JPG→WebP 차세대 압축 (최대 35% 용량 절약)</li>
-                <li>PDF 임베디드 이미지 추출 (원본 품질 유지)</li>
-                </ul>
-                <p>Zero-Knowledge 아키텍처로 완전한 프라이버시 보장, 워터마크 없음, 설치 불필요.</p>
-            ]]></description>
-            <pubDate>Mon, 17 Jun 2025 00:00:00 +0900</pubDate>
-            <guid>https://pdfjpgtool.com/#multi-format-launch</guid>
-            <category>PDF Conversion</category>
-            <category>Image Optimization</category>
-        </item>
-        
-        <item>
-            <title>WebP 변환 기능 추가 - 이미지 용량 최적화</title>
-            <link>https://pdfjpgtool.com/#jpg-to-webp</link>
-            <description><![CDATA[
-                <p>JPG 파일을 최신 WebP 형식으로 변환하여 파일 크기를 크게 줄이면서도 화질을 유지할 수 있는 기능이 추가되었습니다.</p>
-                <p>WebP는 구글에서 개발한 차세대 이미지 형식으로, JPG 대비 25-35% 작은 파일 크기를 제공합니다.</p>
-            ]]></description>
-            <pubDate>Mon, 17 Jun 2025 00:00:00 +0900</pubDate>
-            <guid>https://pdfjpgtool.com/#webp-feature</guid>
-            <category>WebP</category>
-            <category>Image Optimization</category>
-        </item>
-        
-        <item>
-            <title>사용법 가이드 제공 - 쉬운 파일 변환</title>
-            <link>https://pdfjpgtool.com/#usage-guide</link>
-            <description><![CDATA[
-                <p>초보자도 쉽게 사용할 수 있도록 상세한 사용법 가이드가 추가되었습니다.</p>
-                <p>4단계 간단 변환 과정과 주의사항을 통해 누구나 쉽게 파일 변환을 수행할 수 있습니다.</p>
-            ]]></description>
-            <pubDate>Mon, 17 Jun 2025 00:00:00 +0900</pubDate>
-            <guid>https://pdfjpgtool.com/#usage-guide-release</guid>
-            <category>Tutorial</category>
-            <category>User Guide</category>
-        </item>
-        
-    </channel>
+<rss version="2.0">
+  <channel>
+    <title>무료 PDF 변환기 – 300DPI 고품질</title>
+    <link>https://pdfjpgtool.com/</link>
+    <description>300DPI PDF→JPG/PNG, JPG→WebP 변환 무료 툴</description>
+    <language>ko-KR</language>
+    <lastBuildDate>Mon, 22 Jun 2025 09:00:00 +0900</lastBuildDate>
+    <atom:link href="https://pdfjpgtool.com/rss.xml" rel="self" type="application/rss+xml"/>
+    <!-- PubSubHubbub hub 링크 포함 예: -->
+    <link rel="hub" href="https://pubsubhubbub.appspot.com/"/>
+    <item>
+      <title>엔터프라이즈급 PDF 변환기 출시!</title>
+      <link>https://pdfjpgtool.com/#multi-format-launch</link>
+      <guid isPermaLink="true">https://pdfjpgtool.com/#multi-format-launch</guid>
+      <pubDate>Mon, 22 Jun 2025 08:50:00 +0900</pubDate>
+      <description>300DPI 인쇄급 PDF→JPG/PNG 변환 기능 자세히 보기…</description>
+    </item>
+    <!-- 기타 item 요소들 반복 -->
+  </channel>
 </rss>
