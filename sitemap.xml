@@ -3,28 +3,25 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://pdfjpgtool.com/</loc>
-    <lastmod>2025-06-17</lastmod>
+    <lastmod>2025-06-17T00:00:00Z</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://pdfjpgtool.com/images/300dpi-banner.jpg</image:loc>
-      <image:caption>300DPI 고품질 PDF→JPG</image:caption>
+      <image:loc>https://pdfjpgtool.com/images/banner.jpg</image:loc>
     </image:image>
   </url>
   
   <url>
     <loc>https://pdfjpgtool.com/sitemap.xml</loc>
-    <lastmod>2025-06-17</lastmod>
+    <lastmod>2025-06-17T00:00:00Z</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
-
+  
   <url>
     <loc>https://pdfjpgtool.com/rss.xml</loc>
-    <lastmod>2025-06-17</lastmod>
+    <lastmod>2025-06-17T00:00:00Z</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.4</priority>
   </url>
-  
-  <!-- 추가 URL도 동일한 방식으로 구성 -->
 </urlset>
