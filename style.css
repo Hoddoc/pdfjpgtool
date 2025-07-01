@@ -16,7 +16,8 @@
 body {
     font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     font-display: swap;
-    background-color: #fff;   /* ← 흰색으로 변경 */
+    background-color: #fff;
+    color: #23272c;            /* ← 텍스트 색상 추가 */
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -25,7 +26,11 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-
+/* Headings (전체 헤딩에 색상 통일) */
+h1, h2, h3, h4, h5, h6 {
+    color: #23272c;
+    font-weight: 700;
+}
 
 /* Optimized Upload Area */
 .upload-area {
@@ -165,8 +170,8 @@ input[type="checkbox"]:checked + span + span {
 }
 
 .card-title {
-    color: #495057;
-    font-weight: 600;
+    color: #23272c;   /* ← 카드 타이틀 색상 통일 */
+    font-weight: 700;
 }
 
 /* Button Enhancements */
