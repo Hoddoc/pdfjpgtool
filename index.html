@@ -1,21 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-</head>
-<body>
-  
-
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PDF JPG 변환기 | 300DPI 고해상도 PDF→JPG/PNG/WebP 무료 변환</title>
-  
-  <!-- 📄 메타 설명 (140–160자) -->
-   <title>PDF JPG 변환기 | 고해상도 무료 300DPI 이미지 변환</title>
-  <meta name="description" content="고해상도 300DPI PDF를 JPG, PNG, WebP로 변환하는 브라우저 기반 무료 도구입니다. 간편하게 고화질 이미지로 저장하세요.">
-  <link rel="canonical" href="https://pdfjpgtool.com/"
-  
+  <title>PDF JPG 변환 - 무료 300DPI 고화질 PDF→JPG/PNG/WebP 이미지 변환 | PDFJPGTool</title>
+  <meta name="description" content="PDF 파일을 쉽고 빠르게 JPG, PNG, WebP 등 다양한 고해상도 이미지로 무료 변환하세요. 안전한 브라우저 기반 도구로 파일 유출 걱정 없이, 클릭 한 번에 간편 다운로드까지 제공합니다.">
+  <link rel="canonical" href="https://pdfjpgtool.com/">
   <!-- 🔄 Open Graph / 소셜 미리보기 -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="PDF JPG 변환기 | 고해상도 300DPI 이미지 무료 변환"> <!-- 50~60자 권장 :contentReference[oaicite:1]{index=1} -->
@@ -473,7 +463,6 @@
 
             <!DOCTYPE html>
 <html lang="ko">
-<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PDF 업로드 및 클라우드 저장</title>
@@ -1862,30 +1851,5 @@ function uploadToCloud() {
     <div id="language-selector-container" style="position: fixed; top: 20px; left: 20px; z-index: 9999;">
         <!-- Language selector will be inserted here -->
     </div>
-    <script>
-  document.getElementById("uploadForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const fileInput = document.getElementById("fileInput").files[0];
-    const reader = new FileReader();
-    reader.onload = async () => {
-      const fileContent = reader.result.split(",")[1];
-      const res = await fetch("/upload", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          provider: document.getElementById("provider").value,
-          access_token: document.getElementById("access_token").value,
-          filename: fileInput.name,
-          file_content: atob(fileContent)
-        })
-      });
-
-      const data = await res.text();
-      document.getElementById("result").textContent = data;
-    };
-    reader.readAsDataURL(fileInput);
-  });
-</script>
-   
 </body>
 </html>
