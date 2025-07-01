@@ -315,47 +315,75 @@ class PDFImageTool {
      * Enable processing buttons
      */
     enableProcessingButtons() {
-        this.elements.convertPagesBtn.disabled = false;
-        this.elements.extractImagesBtn.disabled = false;
-        
-        const convertToPngBtn = document.getElementById('convertToPngBtn');
-        if (convertToPngBtn) {
-            convertToPngBtn.disabled = false;
-        }
-        
-        const convertToWebpBtn = document.getElementById('convertToWebpBtn');
-        if (convertToWebpBtn) {
-            convertToWebpBtn.disabled = false;
-        }
+    this.elements.convertPagesBtn.disabled = false;
+    this.elements.extractImagesBtn.disabled = false;
 
-        const convertToHwpBtn = document.getElementById('convertToHwpBtn');
-        if (convertToHwpBtn) {
-            convertToHwpBtn.disabled = false;
-        }
+    const convertToPngBtn = document.getElementById('convertToPngBtn');
+    if (convertToPngBtn) {
+        convertToPngBtn.disabled = false;
     }
+    const convertToWebpBtn = document.getElementById('convertToWebpBtn');
+    if (convertToWebpBtn) {
+        convertToWebpBtn.disabled = false;
+    }
+    const convertToHwpBtn = document.getElementById('convertToHwpBtn');
+    if (convertToHwpBtn) {
+        convertToHwpBtn.disabled = false;
+    }
+
+    // ★★★ 반드시 여기에! (함수 닫는 } "바로 위"에)
+    [
+        'convertJpgToPdfBtn',
+        'convertWordToPdfBtn',
+        'convertPptToPdfBtn',
+        'convertExcelToPdfBtn',
+        'convertHtmlToPdfBtn',
+        'convertPdfToPptBtn',
+        'convertPdfToExcelBtn',
+        'convertPdfToPdfaBtn'
+    ].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.disabled = false;
+    });
+} // ← 이게 함수의 끝!
+
 
     /**
      * Disable processing buttons
      */
-    disableProcessingButtons() {
-        this.elements.convertPagesBtn.disabled = true;
-        this.elements.extractImagesBtn.disabled = true;
-        
-        const convertToPngBtn = document.getElementById('convertToPngBtn');
-        if (convertToPngBtn) {
-            convertToPngBtn.disabled = true;
-        }
-        
-        const convertToWebpBtn = document.getElementById('convertToWebpBtn');
-        if (convertToWebpBtn) {
-            convertToWebpBtn.disabled = true;
-        }
+   disableProcessingButtons() {
+    this.elements.convertPagesBtn.disabled = true;
+    this.elements.extractImagesBtn.disabled = true;
 
-        const convertToHwpBtn = document.getElementById('convertToHwpBtn');
-        if (convertToHwpBtn) {
-            convertToHwpBtn.disabled = true;
-        }
+    const convertToPngBtn = document.getElementById('convertToPngBtn');
+    if (convertToPngBtn) {
+        convertToPngBtn.disabled = true;
     }
+    const convertToWebpBtn = document.getElementById('convertToWebpBtn');
+    if (convertToWebpBtn) {
+        convertToWebpBtn.disabled = true;
+    }
+    const convertToHwpBtn = document.getElementById('convertToHwpBtn');
+    if (convertToHwpBtn) {
+        convertToHwpBtn.disabled = true;
+    }
+
+    // 여기!!
+    [
+        'convertJpgToPdfBtn',
+        'convertWordToPdfBtn',
+        'convertPptToPdfBtn',
+        'convertExcelToPdfBtn',
+        'convertHtmlToPdfBtn',
+        'convertPdfToPptBtn',
+        'convertPdfToExcelBtn',
+        'convertPdfToPdfaBtn'
+    ].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.disabled = true;
+    });
+} // ← 이 괄호가 함수의 끝입니다!
+
 
     /**
      * Convert PDF pages to images
@@ -1096,4 +1124,88 @@ window.addEventListener('error', (event) => {
 
 window.addEventListener('unhandledrejection', (event) => {
     console.error('Unhandled promise rejection:', event.reason);
+});
+
+/**
+ * PDF Image Tool - Client-side PDF processing application
+ * Converts PDF pages to images and extracts embedded images
+ */
+
+class PDFImageTool {
+    constructor() {
+        this.pdfDocument = null;
+        this.currentFile = null;
+        this.isProcessing = false;
+
+        // File validation settings
+        this.maxFileSize = 50 * 1024 * 1024; // 50MB
+        this.allowedTypes = ['application/pdf'];
+        this.allowedExtensions = ['.pdf'];
+
+        // Cloud storage tokens
+        this.cloudTokens = { dropbox: null, google: null };
+
+        this.initializeElements();
+        this.setupEventListeners();
+        this.setupPDFJS();
+        this.setupCloudStorageListeners();
+    }
+
+    // ... 기존의 모든 메서드(생략) ...
+
+    // [아래는 PDF 변환 관련 빈 메서드들!]
+    async convertJpgToPdf() {
+        this.showAlert('JPG → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertWordToPdf() {
+        this.showAlert('워드 → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPptToPdf() {
+        this.showAlert('파워포인트 → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertExcelToPdf() {
+        this.showAlert('엑셀 → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertHtmlToPdf() {
+        this.showAlert('HTML → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPdfToPpt() {
+        this.showAlert('PDF → 파워포인트 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPdfToExcel() {
+        this.showAlert('PDF → 엑셀 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPdfToPdfa() {
+        this.showAlert('PDF → PDF/A 변환 기능은 곧 지원됩니다.', 'info');
+    }
+} // ← 클래스 끝!
+
+// =======================
+//  ★ DOMContentLoaded 이후에 버튼 바인딩! (반드시 클래스 밖에서!)
+// =======================
+
+document.addEventListener('DOMContentLoaded', () => {
+    // pdfImageTool 인스턴스 생성
+    window.pdfImageTool = new PDFImageTool();
+
+    // "PDF 변환" 버튼 8개 동적 바인딩
+    [
+        { id: 'convertJpgToPdfBtn',    handler: 'convertJpgToPdf' },
+        { id: 'convertWordToPdfBtn',   handler: 'convertWordToPdf' },
+        { id: 'convertPptToPdfBtn',    handler: 'convertPptToPdf' },
+        { id: 'convertExcelToPdfBtn',  handler: 'convertExcelToPdf' },
+        { id: 'convertHtmlToPdfBtn',   handler: 'convertHtmlToPdf' },
+        { id: 'convertPdfToPptBtn',    handler: 'convertPdfToPpt' },
+        { id: 'convertPdfToExcelBtn',  handler: 'convertPdfToExcel' },
+        { id: 'convertPdfToPdfaBtn',   handler: 'convertPdfToPdfa' }
+    ].forEach(({ id, handler }) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (window.pdfImageTool && typeof window.pdfImageTool[handler] === 'function') {
+                    window.pdfImageTool[handler]();
+                }
+            });
+        }
+    });
 });
