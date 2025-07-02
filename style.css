@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
 /* PDF Image Tool - Optimized Styles */
-
 :root {
     --primary-color: #0d6efd;
     --success-color: #198754;
@@ -899,3 +899,27 @@ input[type="checkbox"]:checked + span + span {
         color: black !important;
     }
 }
+
+/* 추가 버튼 컬러 커스텀 */
+.btn-teal {
+  background-color: #20c997;
+  color: #fff;
+  border-color: #20c997;
+}
+.btn-teal:hover, .btn-teal:focus {
+  background-color: #17a589;
+  color: #fff;
+  border-color: #17a589;
+}
+
+.btn-purple {
+  background-color: #7c3aed;
+  color: #fff;
+  border-color: #7c3aed;
+}
+.btn-purple:hover, .btn-purple:focus {
+  background-color: #5b21b6;
+  color: #fff;
+  border-color: #5b21b6;
+}
+
