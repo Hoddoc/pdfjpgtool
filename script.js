@@ -1,60 +1,3 @@
-/**
- * PDF Image Tool - Client-side PDF processing application
- * Converts PDF pages to images and extracts embedded images
- */
-
-class PDFImageTool {
-    constructor() {
-        this.pdfDocument = null;
-        this.currentFile = null;
-        this.isProcessing = false;
-
-        // File validation settings
-        this.maxFileSize = 50 * 1024 * 1024; // 50MB
-        this.allowedTypes = ['application/pdf'];
-        this.allowedExtensions = ['.pdf'];
-
-        // Cloud storage tokens
-        this.cloudTokens = { dropbox: null, google: null };
-
-        this.initializeElements();
-        this.setupEventListeners();
-        this.setupPDFJS();
-        this.setupCloudStorageListeners();
-    }
-
-    // --------------- (여기 아래 네가 준 모든 메서드 그대로! 중복 X로!) ---------------
-    // ... 위에서 붙여준 전체 코드의 메서드들 붙여넣기 ...
-    // 예: initializeElements, setupEventListeners, validateFile, handleFileSelect, loadPDF 등등
-    // (전체 코드에서 이미 다 있음, PDF 변환 관련 빈 메서드도 같이 아래에!)
-
-    // [PDF 변환 관련 빈 메서드]
-    async convertJpgToPdf() {
-        this.showAlert('JPG → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertWordToPdf() {
-        this.showAlert('워드 → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPptToPdf() {
-        this.showAlert('파워포인트 → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertExcelToPdf() {
-        this.showAlert('엑셀 → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertHtmlToPdf() {
-        this.showAlert('HTML → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPdfToPpt() {
-        this.showAlert('PDF → 파워포인트 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPdfToExcel() {
-        this.showAlert('PDF → 엑셀 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPdfToPdfa() {
-        this.showAlert('PDF → PDF/A 변환 기능은 곧 지원됩니다.', 'info');
-    }
-} // ← 클래스 끝!
-
 // -----------------------------------------------------
 // 전역 함수(가이드 토글 등)
 window.toggleGuide = function() {
@@ -1198,26 +1141,6 @@ class PDFImageTool {
                 window.errorSystem.showError('cloudStorageError');
             }
             return false;
-        }
-    }
-}
-
-// Global function for guide toggle - defined before DOM load
-window.toggleGuide = function() {
-    const usageInstructions = document.getElementById('usageInstructions');
-    const guideChevron = document.getElementById('guideChevron');
-    
-    if (usageInstructions && guideChevron) {
-        const isVisible = usageInstructions.style.display !== 'none';
-        
-        if (isVisible) {
-            // Collapse
-            usageInstructions.style.display = 'none';
-            guideChevron.style.transform = 'rotate(0deg)';
-        } else {
-            // Expand
-            usageInstructions.style.display = 'block';
-            guideChevron.style.transform = 'rotate(180deg)';
         }
     }
 }
