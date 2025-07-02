@@ -8,6 +8,125 @@ class PDFImageTool {
         this.pdfDocument = null;
         this.currentFile = null;
         this.isProcessing = false;
+
+        // File validation settings
+        this.maxFileSize = 50 * 1024 * 1024; // 50MB
+        this.allowedTypes = ['application/pdf'];
+        this.allowedExtensions = ['.pdf'];
+
+        // Cloud storage tokens
+        this.cloudTokens = { dropbox: null, google: null };
+
+        this.initializeElements();
+        this.setupEventListeners();
+        this.setupPDFJS();
+        this.setupCloudStorageListeners();
+    }
+
+    // --------------- (여기 아래 네가 준 모든 메서드 그대로! 중복 X로!) ---------------
+    // ... 위에서 붙여준 전체 코드의 메서드들 붙여넣기 ...
+    // 예: initializeElements, setupEventListeners, validateFile, handleFileSelect, loadPDF 등등
+    // (전체 코드에서 이미 다 있음, PDF 변환 관련 빈 메서드도 같이 아래에!)
+
+    // [PDF 변환 관련 빈 메서드]
+    async convertJpgToPdf() {
+        this.showAlert('JPG → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertWordToPdf() {
+        this.showAlert('워드 → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPptToPdf() {
+        this.showAlert('파워포인트 → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertExcelToPdf() {
+        this.showAlert('엑셀 → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertHtmlToPdf() {
+        this.showAlert('HTML → PDF 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPdfToPpt() {
+        this.showAlert('PDF → 파워포인트 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPdfToExcel() {
+        this.showAlert('PDF → 엑셀 변환 기능은 곧 지원됩니다.', 'info');
+    }
+    async convertPdfToPdfa() {
+        this.showAlert('PDF → PDF/A 변환 기능은 곧 지원됩니다.', 'info');
+    }
+} // ← 클래스 끝!
+
+// -----------------------------------------------------
+// 전역 함수(가이드 토글 등)
+window.toggleGuide = function() {
+    const usageInstructions = document.getElementById('usageInstructions');
+    const guideChevron = document.getElementById('guideChevron');
+    if (usageInstructions && guideChevron) {
+        const isVisible = usageInstructions.style.display !== 'none';
+        if (isVisible) {
+            usageInstructions.style.display = 'none';
+            guideChevron.style.transform = 'rotate(0deg)';
+        } else {
+            usageInstructions.style.display = 'block';
+            guideChevron.style.transform = 'rotate(180deg)';
+        }
+    }
+};
+
+// -----------------------------------------------------
+// DOMContentLoaded에서 모든 초기화/바인딩
+document.addEventListener('DOMContentLoaded', () => {
+    // 접근성 에러 시스템 초기화
+    if (typeof AccessibleErrorSystem !== 'undefined') {
+        window.errorSystem = new AccessibleErrorSystem();
+    }
+
+    window.pdfImageTool = new PDFImageTool();
+
+    // 변환 버튼 8개 바인딩
+    [
+        { id: 'convertJpgToPdfBtn',    handler: 'convertJpgToPdf' },
+        { id: 'convertWordToPdfBtn',   handler: 'convertWordToPdf' },
+        { id: 'convertPptToPdfBtn',    handler: 'convertPptToPdf' },
+        { id: 'convertExcelToPdfBtn',  handler: 'convertExcelToPdf' },
+        { id: 'convertHtmlToPdfBtn',   handler: 'convertHtmlToPdf' },
+        { id: 'convertPdfToPptBtn',    handler: 'convertPdfToPpt' },
+        { id: 'convertPdfToExcelBtn',  handler: 'convertPdfToExcel' },
+        { id: 'convertPdfToPdfaBtn',   handler: 'convertPdfToPdfa' }
+    ].forEach(({ id, handler }) => {
+        const btn = document.getElementById(id);
+        if (btn) {
+            btn.addEventListener('click', () => {
+                if (window.pdfImageTool && typeof window.pdfImageTool[handler] === 'function') {
+                    window.pdfImageTool[handler]();
+                }
+            });
+        }
+    });
+
+    // 클라우드 저장소 연결 함수 전역 등록
+    window.connectDropbox = () => window.pdfImageTool.connectDropbox();
+    window.connectGoogleDrive = () => window.pdfImageTool.connectGoogleDrive();
+});
+
+// -----------------------------------------------------
+// 예외 처리(전역 에러 핸들러)
+window.addEventListener('error', (event) => {
+    console.error('Uncaught error:', event.error);
+});
+window.addEventListener('unhandledrejection', (event) => {
+    console.error('Unhandled promise rejection:', event.reason);
+});
+
+/**
+ * PDF Image Tool - Client-side PDF processing application
+ * Converts PDF pages to images and extracts embedded images
+ */
+
+class PDFImageTool {
+    constructor() {
+        this.pdfDocument = null;
+        this.currentFile = null;
+        this.isProcessing = false;
         
         // File validation settings
         this.maxFileSize = 50 * 1024 * 1024; // 50MB
@@ -1126,86 +1245,5 @@ window.addEventListener('unhandledrejection', (event) => {
     console.error('Unhandled promise rejection:', event.reason);
 });
 
-/**
- * PDF Image Tool - Client-side PDF processing application
- * Converts PDF pages to images and extracts embedded images
- */
 
-class PDFImageTool {
-    constructor() {
-        this.pdfDocument = null;
-        this.currentFile = null;
-        this.isProcessing = false;
 
-        // File validation settings
-        this.maxFileSize = 50 * 1024 * 1024; // 50MB
-        this.allowedTypes = ['application/pdf'];
-        this.allowedExtensions = ['.pdf'];
-
-        // Cloud storage tokens
-        this.cloudTokens = { dropbox: null, google: null };
-
-        this.initializeElements();
-        this.setupEventListeners();
-        this.setupPDFJS();
-        this.setupCloudStorageListeners();
-    }
-
-    // ... 기존의 모든 메서드(생략) ...
-
-    // [아래는 PDF 변환 관련 빈 메서드들!]
-    async convertJpgToPdf() {
-        this.showAlert('JPG → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertWordToPdf() {
-        this.showAlert('워드 → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPptToPdf() {
-        this.showAlert('파워포인트 → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertExcelToPdf() {
-        this.showAlert('엑셀 → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertHtmlToPdf() {
-        this.showAlert('HTML → PDF 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPdfToPpt() {
-        this.showAlert('PDF → 파워포인트 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPdfToExcel() {
-        this.showAlert('PDF → 엑셀 변환 기능은 곧 지원됩니다.', 'info');
-    }
-    async convertPdfToPdfa() {
-        this.showAlert('PDF → PDF/A 변환 기능은 곧 지원됩니다.', 'info');
-    }
-} // ← 클래스 끝!
-
-// =======================
-//  ★ DOMContentLoaded 이후에 버튼 바인딩! (반드시 클래스 밖에서!)
-// =======================
-
-document.addEventListener('DOMContentLoaded', () => {
-    // pdfImageTool 인스턴스 생성
-    window.pdfImageTool = new PDFImageTool();
-
-    // "PDF 변환" 버튼 8개 동적 바인딩
-    [
-        { id: 'convertJpgToPdfBtn',    handler: 'convertJpgToPdf' },
-        { id: 'convertWordToPdfBtn',   handler: 'convertWordToPdf' },
-        { id: 'convertPptToPdfBtn',    handler: 'convertPptToPdf' },
-        { id: 'convertExcelToPdfBtn',  handler: 'convertExcelToPdf' },
-        { id: 'convertHtmlToPdfBtn',   handler: 'convertHtmlToPdf' },
-        { id: 'convertPdfToPptBtn',    handler: 'convertPdfToPpt' },
-        { id: 'convertPdfToExcelBtn',  handler: 'convertPdfToExcel' },
-        { id: 'convertPdfToPdfaBtn',   handler: 'convertPdfToPdfa' }
-    ].forEach(({ id, handler }) => {
-        const btn = document.getElementById(id);
-        if (btn) {
-            btn.addEventListener('click', () => {
-                if (window.pdfImageTool && typeof window.pdfImageTool[handler] === 'function') {
-                    window.pdfImageTool[handler]();
-                }
-            });
-        }
-    });
-});
