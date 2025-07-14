@@ -306,7 +306,103 @@ h1, h2, h3, h4, h5, h6, .card-title {
   margin: -8px;
 }
 
-/* Responsive */
+/* =============================== */
+/*   ▼▼ PDF 변환 가이드 전용 ▼▼   */
+/* =============================== */
+
+#guideSection.options-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2.2rem;
+  max-width: 700px;
+}
+#guideSection .options-card-body {
+  padding: 2rem;
+}
+.guide-toggle-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 18px;
+  transition: background 0.12s;
+  border-radius: 10px;
+  padding: 8px 4px;
+}
+.guide-toggle-row:hover { background: #f6f9fa; }
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #23272c;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+.guide-subtext {
+  color: #6c757d;
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 0;
+}
+.guide-chevron {
+  transition: transform 0.2s;
+}
+.section-hidden { display: none; }
+.guide-steps-list {
+  display: flex;
+  gap: 18px;
+  justify-content: flex-start;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+}
+.guide-step-item {
+  background: #f8f9fa;
+  border: 1.5px solid #b6d7ff;
+  border-radius: 12px;
+  min-width: 130px;
+  flex: 1 1 130px;
+  padding: 1rem 1rem 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 1.01rem;
+  font-weight: 500;
+  box-shadow: 0 2px 10px rgba(13,110,253,0.03);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.guide-step-circle {
+  display: inline-block;
+  background: #0d6efd;
+  color: #fff;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.12em;
+  width: 2.1em; height: 2.1em;
+  line-height: 2.1em;
+  margin-bottom: 7px;
+  margin-right: 0;
+  box-shadow: 0 1px 4px rgba(13,110,253,0.08);
+}
+.guide-step-desc {
+  display: block;
+  color: #6c757d;
+  font-size: 0.98em;
+  font-weight: 400;
+  margin-top: 3px;
+}
+.guide-feature-list {
+  list-style: disc;
+  padding-left: 24px;
+  color: #444;
+  font-size: 1.04rem;
+}
+.guide-feature-list li {
+  margin-bottom: 7px;
+}
+
+/* =============================== */
+
 @media (max-width: 1200px) {
   .container { max-width: 100%; padding: 0 20px; }
 }
@@ -321,6 +417,10 @@ h1, h2, h3, h4, h5, h6, .card-title {
   .progress-card-body { padding: 1.5rem; }
   .progress { height: 8px; }
   .col-md-4, .col-md-3 { max-width: 100%; flex: 0 0 100%; margin-bottom: 1rem; }
+  #guideSection .options-card-body { padding: 1.2rem 0.7rem; }
+  .guide-steps-list { gap: 10px; }
+  .guide-step-item { font-size: 0.96rem; min-width: 100px; }
+  .card-title { font-size: 1.08rem; }
 }
 @media (max-width: 576px) {
   .container { padding: 0 10px; }
@@ -333,11 +433,35 @@ h1, h2, h3, h4, h5, h6, .card-title {
   .alert { padding: 0.75rem; font-size: 0.875rem; border-left-width: 3px; }
   .row .col-md-3 { margin-bottom: 0.75rem; }
   .btn-close { padding: 0.75rem; margin: -0.75rem; }
+  .guide-steps-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .guide-step-item {
+    align-items: flex-start;
+    text-align: left;
+    padding: 0.95rem 1rem;
+  }
 }
 @media (max-width: 400px) {
   .container { padding: 0 8px; }
   .btn { font-size: 0.8rem; padding: 0.5rem 1rem; }
   .upload-area, .upload-area-new { min-height: 100px; padding: 0.5rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+@media (prefers-contrast: high) {
+  .upload-area, .upload-area-new { border-width: 3px; }
+  .btn { border-width: 2px; }
+}
+@media print {
+  .upload-area, .btn, .progress-card { display: none !important; }
+  body { background: white !important; color: black !important; }
 }
 
 /* FadeIn/SlideDown for Alerts, Info, etc. */
@@ -356,22 +480,3 @@ h1, h2, h3, h4, h5, h6, .card-title {
   border: 2px solid #f3f3f3;
   border-top: 2px solid var(--primary-color);
   border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-@media (prefers-contrast: high) {
-  .upload-area, .upload-area-new { border-width: 3px; }
-  .btn { border-width: 2px; }
-}
-@media print {
-  .upload-area, .btn, .progress-card { display: none !important; }
-  body { background: white !important; color: black !important; }
-}
