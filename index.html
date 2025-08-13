@@ -1872,5 +1872,106 @@ function uploadToCloud() {
 })();
 </script>
 
+  <!-- === Multi-Upload & Multi-Format Patch (HTML-only) === -->
+<script>
+(function () {
+  // 1) 작업 상태/허용 확장자 테이블(필요한 것만 사용하세요)
+  const taskConfig = {
+    pdfToImages: { exts: ['.pdf'], mime: ['application/pdf'], multiple: false, maxMB: 50 },
+    jpgToPdf:    { exts: ['.jpg','.jpeg','.png'], mime: ['image/jpeg','image/jpg','image/png'], multiple: true,  maxMB: 100 },
+    wordToPdf:   { exts: ['.doc','.docx'], mime: ['application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document'], multiple: false, maxMB: 50 },
+    pptToPdf:    { exts: ['.ppt','.pptx'], mime: ['application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation'], multiple: false, maxMB: 80 },
+    excelToPdf:  { exts: ['.xls','.xlsx'], mime: ['application/vnd.ms-excel','application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'], multiple: false, maxMB: 80 },
+    htmlToPdf:   { exts: ['.html','.htm'], mime: ['text/html'], multiple: false, maxMB: 10 }
+  };
+
+  // 2) 도우미
+  const el = id => document.getElementById(id);
+  const input = el('pdfFileInput');
+  const uploadArea = el('uploadArea');
+  let currentTask = 'pdfToImages';
+
+  if (!input) return;
+
+  // 3) 버튼 클릭 시 작업/입력 제한 동적 세팅 (버튼이 없으면 자동 무시)
+  function setInputForTask(task) {
+    currentTask = task;
+    const cfg = taskConfig[task] || taskConfig.pdfToImages;
+    input.accept = cfg.exts.join(',');
+    input.multiple = !!cfg.multiple;
+  }
+
+  el('convertPagesBtn')?.addEventListener('click', () => { setInputForTask('pdfToImages'); input.click(); });
+  el('convertToPngBtn')?.addEventListener('click', () => { setInputForTask('pdfToImages'); input.click(); });
+  el('convertJpgToPdfBtn')?.addEventListener('click', () => { setInputForTask('jpgToPdf');    input.click(); });
+  el('convertWordToPdfBtn')?.addEventListener('click', () => { setInputForTask('wordToPdf');  input.click(); });
+  el('convertPptToPdfBtn')?.addEventListener('click',  () => { setInputForTask('pptToPdf');   input.click(); });
+  el('convertExcelToPdfBtn')?.addEventListener('click',() => { setInputForTask('excelToPdf'); input.click(); });
+  el('convertHtmlToPdfBtn')?.addEventListener('click', () => { setInputForTask('htmlToPdf');  input.click(); });
+
+  // 4) 검증(작업별)
+  function validateByTask(file) {
+    const cfg = taskConfig[currentTask] || taskConfig.pdfToImages;
+    const name = (file.name || '').toLowerCase();
+    const okExt = cfg.exts.some(ext => name.endsWith(ext));
+    const maxBytes = (cfg.maxMB || 50) * 1024 * 1024;
+    const errs = [];
+    if (!okExt) errs.push(`허용 확장자: ${cfg.exts.join(', ')}`);
+    if (file.size > maxBytes) errs.push(`최대 용량: ${cfg.maxMB}MB`);
+    return { ok: errs.length === 0, errs };
+  }
+
+  // 5) 파일 라우팅: PDF는 기존 로직(handleFileSelect) 사용, 그 외는 안내
+  function route(file) {
+    const v = validateByTask(file);
+    if (!v.ok) {
+      if (window.pdfImageTool?.showAlert) v.errs.forEach(m=>window.pdfImageTool.showAlert(m,'warning'));
+      return;
+    }
+    switch (currentTask) {
+      case 'pdfToImages':
+        // 기존 PDF 처리 흐름 호출
+        if (window.pdfImageTool?.handleFileSelect) window.pdfImageTool.handleFileSelect(file);
+        break;
+      case 'jpgToPdf':
+        // 여기에 JPG→PDF 병합 로직을 추가할 수 있습니다 (PDF-lib/jsPDF 등).
+        if (window.pdfImageTool?.showAlert) window.pdfImageTool.showAlert('JPG→PDF 병합은 별도 모듈 연동 시 활성화됩니다.', 'info');
+        break;
+      case 'wordToPdf':
+      case 'pptToPdf':
+      case 'excelToPdf':
+      case 'htmlToPdf':
+        if (window.pdfImageTool?.showAlert) window.pdfImageTool.showAlert('이 형식은 서버 변환(API) 연동이 필요합니다.', 'info');
+        break;
+      default:
+        if (window.pdfImageTool?.handleFileSelect) window.pdfImageTool.handleFileSelect(file);
+    }
+  }
+
+  // 6) 여러 파일 선택 처리 (기존 단일 처리와 충돌 없이 보조)
+  input.addEventListener('change', function (e) {
+    const files = Array.from(e.target?.files || []);
+    if (files.length <= 1) return;           // 단일 파일은 기존 로직이 처리
+    files.forEach(route);                     // 여러 파일은 우리가 모두 라우팅
+  });
+
+  // 7) 드래그&드롭에서도 여러 파일 처리
+  if (uploadArea) {
+    uploadArea.addEventListener('drop', function (e) {
+      try {
+        const files = Array.from(e.dataTransfer?.files || []);
+        if (!files.length) return;
+        files.forEach(route);
+      } catch (err) { console.error(err); }
+    });
+  }
+
+  // 8) 사용자가 직접 파일 입력 태그를 클릭했다면, 현재 작업에 맞는 accept/multiple 유지
+  // (별도 코드 불필요: 위 setInputForTask로 버튼 클릭 시 이미 설정됨)
+})();
+</script>
+<!-- === /Multi-Upload & Multi-Format Patch === -->
+
+
 </body>
 </html>
