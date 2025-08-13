@@ -129,7 +129,9 @@ class PDFImageTool {
         }
 
         this.elements.pdfFile.addEventListener('change', (e) => {
-            this.handleFileSelect(e.target.files[0]);
+    const files = Array.from(e.target.files || []);
+    files.forEach(file => this.handleFileSelect(file));
+
         });
 
         this.elements.removeFile.addEventListener('click', () => {
@@ -147,15 +149,17 @@ class PDFImageTool {
         });
 
         this.elements.uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            this.elements.uploadArea.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file) {
-                this.handleFileSelect(file);
-            } else {
-                this.showAlert('파일을 선택해주세요.', 'warning');
-            }
-        });
+    e.preventDefault();
+    this.elements.uploadArea.classList.remove('dragover');
+
+    const files = Array.from(e.dataTransfer?.files || []);
+    if (files.length) {
+        files.forEach(file => this.handleFileSelect(file));
+    } else {
+        this.showAlert('파일을 선택해주세요.', 'warning');
+    }
+});
+
 
         // Processing buttons
         this.elements.convertPagesBtn.addEventListener('click', () => {
