@@ -490,7 +490,7 @@
   <div id="uploadSection">
     <div class="upload-area-new" id="uploadArea">
       <label for="pdfFileInput" class="visually-hidden">PDF 파일 선택</label>
-      <input type="file" id="pdfFileInput" accept=".pdf" class="form-control" style="display: none;" aria-label="PDF 파일 선택">
+      <input type="file" id="pdfFileInput" accept=".pdf" multiple class="form-control" style="display: none;" aria-label="PDF 파일 선택">
       <div class="text-center py-5">
         <div class="upload-icon mb-4">
           <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1839,5 +1839,38 @@ function uploadToCloud() {
     <div id="language-selector-container" style="position: fixed; top: 20px; left: 20px; z-index: 9999;">
         <!-- Language selector will be inserted here -->
     </div>
+
+  <script>
+// === Multi-file patch: handle selecting/dropping multiple files (HTML-only) ===
+(function () {
+  function el(id){ return document.getElementById(id); }
+  const input = el('pdfFileInput');
+  const uploadArea = el('uploadArea');
+  if (!input) return;
+
+  // 여러 파일 선택 시: 기존 단일 처리 로직과 충돌 없게 보조 처리
+  input.addEventListener('change', function (e) {
+    const files = Array.from(e.target?.files || []);
+    if (files.length <= 1) return; // 단일 파일이면 기존 코드에 맡김
+    if (window.pdfImageTool && typeof window.pdfImageTool.handleFileSelect === 'function') {
+      files.forEach(f => { try { window.pdfImageTool.handleFileSelect(f); } catch (err) { console.error(err); } });
+    }
+  });
+
+  // 드래그&드롭 시: 모든 파일 순회 처리
+  if (uploadArea) {
+    uploadArea.addEventListener('drop', function (e) {
+      try {
+        const files = Array.from(e.dataTransfer?.files || []);
+        if (!files.length) return;
+        if (window.pdfImageTool && typeof window.pdfImageTool.handleFileSelect === 'function') {
+          files.forEach(f => { try { window.pdfImageTool.handleFileSelect(f); } catch (err) { console.error(err); } });
+        }
+      } catch (err) { console.error(err); }
+    });
+  }
+})();
+</script>
+
 </body>
 </html>
